@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.Views.ItemsPage"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout Spacing="20" Padding="15">
+            <StackLayout Padding="10, 10, 10, 10" Orientation="Horizontal">
+                <Button Text="Update Weather"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        BorderWidth="1"
+                        BorderColor="White"
+                        BackgroundColor="DarkBlue"
+                        Margin="5"
+                        TextColor="White"
+                        Clicked="UpdateWeather_Clicked"
+                        AutomationId="UpdateButton" />
+
+                <Button Text="Delete Selected"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        BorderWidth="1"
+                        BorderColor="White"
+                        BackgroundColor="DarkBlue"
+                        Margin="5"
+                        TextColor="White"
+                        Clicked="LocationDelete_Clicked"
+                        AutomationId="DeleteButton" />
+                <Button Text="Add Location" Clicked="AddItem_Clicked"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        Margin="5"
+                        BorderWidth="1"
+                        TextColor="White"
+                        BorderColor="White"
+                        BackgroundColor="DarkBlue"
+                        AutomationId="AddButton"/>
+            </StackLayout>
+
+            <ListView x:Name="ItemsListView"
+                      ItemsSource="{Binding LocationInfos}"
+                      VerticalOptions="FillAndExpand"
+                      HasUnevenRows="true"
+                      RefreshCommand="{Binding LoadItemsCommand}"
+                      IsPullToRefreshEnabled="true"
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                      CachingStrategy="RecycleElement"
+                      AutomationId="AllLocationsList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell AutomationId="Cell">
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding LocationName}"
+                                       LineBreakMode="NoWrap"
+                                       Style="{DynamicResource ListItemTextStyle}"
+                                       FontSize="16" />
+                                <Label Text="{Binding PostalCode}"
+                                       LineBreakMode="NoWrap"
+                                       Style="{DynamicResource ListItemTextStyle}"
+                                       FontSize="16" />
+                                <Label Text="{Binding Country.EnglishName}"
+                                       LineBreakMode="NoWrap"
+                                       Style="{DynamicResource ListItemDetailTextStyle}"
+                                       FontSize="13" />
+                                <Label Text="{Binding WeatherInfo.WeatherText}"
+                                       LineBreakMode="NoWrap"
+                                       Style="{DynamicResource ListItemTextStyle}"
+                                       FontSize="16" />
+                                <Label Text="{Binding WeatherInfo.Temperature.Metric.Value}"
+                                       LineBreakMode="NoWrap"
+                                       Style="{DynamicResource ListItemDetailTextStyle}"
+                                       FontSize="13" />
+                                <Label Text="{Binding WeatherInfo.Temperature.Metric.Unit}"
+                                       LineBreakMode="NoWrap"
+                                       Style="{DynamicResource ListItemDetailTextStyle}"
+                                       FontSize="13" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

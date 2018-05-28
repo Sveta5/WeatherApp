@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="WeatherApp.Views.SearchPage"
+		     Title="Lication Search">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Back" Clicked="Back_Clicked" AutomationId="BackButton">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="UWP" Value="back.png" />
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Spacing="20" Padding="15">
+            <Grid Padding="10, 10, 10, 10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Search by Zip Code" 
+                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                       HorizontalOptions="Center"
+                       TextColor="White" FontAttributes="Bold" FontSize="Medium" />
+
+                <Label x:Name="zipCodeLabel" Text="Zip Code:" 
+                       Grid.Row="1" Grid.Column="0"
+                       VerticalOptions="Center"/>
+
+                <Entry x:Name="zipCodeEntry"
+                       Grid.Row="1" Grid.Column="1"
+                       VerticalOptions="Center"
+                       Margin="5,0"
+                       BackgroundColor="DarkGray"
+                       TextColor="White"
+                       AutomationId="zipCodeEntry"/>
+
+                <Button x:Name="getLocationBtn" Text="Search location" 
+                        Grid.Row="1" Grid.Column="2"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        BorderWidth="1"
+                        BorderColor="White"
+                        BackgroundColor="DarkGray"
+                        TextColor="White"
+                        Clicked="SearchWeatherBtn_Clicked"
+                        AutomationId="getLocationBtn" />
+            </Grid>
+            <Label Text="Search results" x:Name="SerchResultLabel"
+                       Margin="10,0,0,0"
+                       HorizontalOptions="Start" AutomationId="SerchResultLabel"
+                       TextColor="Black" FontSize="Medium" />
+            <ListView x:Name="SerchedItemsListView"
+                      ItemsSource="{Binding LocationInfos}"
+                      VerticalOptions="FillAndExpand"
+                      HasUnevenRows="true"
+                      IsPullToRefreshEnabled="true"
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                      CachingStrategy="RecycleElement"
+                      ItemSelected="OnLocationSelected"
+                      AutomationId="SearchedItemsListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding Key}"
+                                       LineBreakMode="NoWrap"
+                                       Style="{DynamicResource ListItemTextStyle}"
+                                       FontSize="16" />
+                                <Label Text="{Binding LocationName}"
+                                       LineBreakMode="NoWrap"
+                                       Style="{DynamicResource ListItemTextStyle}"
+                                       FontSize="16" />
+                                <Label Text="{Binding PostalCode}"
+                                       LineBreakMode="NoWrap"
+                                       Style="{DynamicResource ListItemTextStyle}"
+                                       FontSize="16" />
+                                <Label Text="{Binding Country.EnglishName}"
+                                       LineBreakMode="NoWrap"
+                                       Style="{DynamicResource ListItemDetailTextStyle}"
+                                       FontSize="13" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

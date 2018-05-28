@@ -10,6 +10,9 @@
                     <On Platform="iOS" Value="tab_feed.png"/>
                 </OnPlatform>
             </NavigationPage.Icon>
+            <x:Arguments>
+                <views:ItemsPage />
+            </x:Arguments>
         </NavigationPage>
     </TabbedPage.Children>
 </TabbedPage>
