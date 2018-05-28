@@ -5,13 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\**" />
     <Compile Remove="Services\**" />
     <Compile Remove="ViewModels\**" />
-    <EmbeddedResource Remove="Models\**" />
     <EmbeddedResource Remove="Services\**" />
     <EmbeddedResource Remove="ViewModels\**" />
-    <None Remove="Models\**" />
     <None Remove="Services\**" />
     <None Remove="ViewModels\**" />
   </ItemGroup>
@@ -26,6 +23,11 @@
     <EmbeddedResource Remove="Views\ItemDetailPage.xaml" />
     <EmbeddedResource Remove="Views\ItemsPage.xaml" />
     <EmbeddedResource Remove="Views\SearchPage.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Services\Weather\IWeatherApiClient.cs" />
+    <Compile Include="Services\Weather\WeaterApiClient.cs" />
   </ItemGroup>
 
   <ItemGroup>
