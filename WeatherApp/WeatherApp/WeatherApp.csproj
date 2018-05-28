@@ -6,11 +6,8 @@
 
   <ItemGroup>
     <Compile Remove="Services\**" />
-    <Compile Remove="ViewModels\**" />
     <EmbeddedResource Remove="Services\**" />
-    <EmbeddedResource Remove="ViewModels\**" />
     <None Remove="Services\**" />
-    <None Remove="ViewModels\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Services\Data\IDataStore.cs" />
+    <Compile Include="Services\Data\PropertiesDataStore.cs" />
+    <Compile Include="Services\Location\ILocationService.cs" />
+    <Compile Include="Services\Location\LocationService.cs" />
     <Compile Include="Services\Weather\IWeatherApiClient.cs" />
     <Compile Include="Services\Weather\WeaterApiClient.cs" />
   </ItemGroup>
