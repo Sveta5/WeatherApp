@@ -4,6 +4,8 @@ using Xamarin.Forms;
 using WeatherApp.Models;
 using WeatherApp.Views;
 using System.Linq;
+using WeatherApp.Services.Location;
+using WeatherApp.Services.Weather;
 
 namespace WeatherApp.ViewModels
 {
@@ -15,6 +17,16 @@ namespace WeatherApp.ViewModels
 
         public ItemsViewModel()
         {
+            InitializeItemsViewModel();
+        }
+        
+        public ItemsViewModel(ILocationService<LocationInfo> locationService, IWeatherApiClient weatherApiClient) : base(locationService, weatherApiClient)
+        {
+            InitializeItemsViewModel();
+        }
+
+        private void InitializeItemsViewModel()
+        {
             Title = "Your Locations List";
             LocationInfos = new ObservableCollection<LocationInfo>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
@@ -23,13 +35,12 @@ namespace WeatherApp.ViewModels
             MessagingCenter.Subscribe<SearchPage, LocationInfo>(this, "AddItem", async (obj, item) =>
             {
                 if (LocationInfos.Any(element => element.Key.Equals(item.Key))) return;
-                var weather = await WeaterApiClient.GetCurrentWeather(item.Key);
+                var weather = await WeatherApiClient.GetCurrentWeather(item.Key);
                 item.WeatherInfo = weather;
                 LocationInfos.Add(item);
                 await LocationService.AddItemAsync(item);
             });
         }
-
         async Task ExecuteLoadItemsCommand()
         {
             await ExecuteCommand(async () =>
@@ -38,7 +49,7 @@ namespace WeatherApp.ViewModels
                 var items = await LocationService.GetItemsAsync();
                 foreach (var locationInfo in items)
                 {
-                    var weather = await WeaterApiClient.GetCurrentWeather(locationInfo.Key);
+                    var weather = await WeatherApiClient.GetCurrentWeather(locationInfo.Key);
                     locationInfo.WeatherInfo = weather;
                     LocationInfos.Add(locationInfo);
                 }

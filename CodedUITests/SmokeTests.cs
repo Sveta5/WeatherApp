@@ -1,9 +1,8 @@
 ﻿using CodedUITests;
-using Microsoft.VisualStudio.TestTools.UITest.Input;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace CodedUITestProject.TestCases
 {
@@ -17,8 +16,9 @@ namespace CodedUITestProject.TestCases
         [TestMethod]
         public void AddAndDeleteLocationFunctionalityTest()
         {
+            Task.Delay(1000);
             UIMap.UIMyWeatherAppUWPWindow.UIYourLocationsListTabList.UIXamarinFormsNavigatiTabPage.UIAllLocationsListList.WaitForControlExist(10000);
-            UIMap.UIMyWeatherAppUWPWindow.UIYourLocationsListTabList.UIXamarinFormsNavigatiTabPage.UIAddLocationButton.WaitForControlEnabled(10000);
+            UIMap.UIMyWeatherAppUWPWindow.UIYourLocationsListTabList.UIXamarinFormsNavigatiTabPage.UIAddLocationButton.WaitForControlExist(10000);
             var startItemsCount = UIMap.UIMyWeatherAppUWPWindow.UIYourLocationsListTabList.UIXamarinFormsNavigatiTabPage.UIAllLocationsListList.Items.Count;
 
             Gesture.Tap(UIMap.UIMyWeatherAppUWPWindow.UIYourLocationsListTabList.UIXamarinFormsNavigatiTabPage.UIAddLocationButton);
@@ -48,7 +48,7 @@ namespace CodedUITestProject.TestCases
         public void SearchLocationFunctionalityTest()
         {
             UIMap.UIMyWeatherAppUWPWindow.UIYourLocationsListTabList.UIXamarinFormsNavigatiTabPage.UIAllLocationsListList.WaitForControlExist(10000);
-            UIMap.UIMyWeatherAppUWPWindow.UIYourLocationsListTabList.UIXamarinFormsNavigatiTabPage.UIAddLocationButton.WaitForControlEnabled(10000);
+            UIMap.UIMyWeatherAppUWPWindow.UIYourLocationsListTabList.UIXamarinFormsNavigatiTabPage.UIAddLocationButton.WaitForControlExist(10000);
 
             var postalCode = "16802";
             UIMap.UIMyWeatherAppUWPWindow.UIYourLocationsListTabList.UIXamarinFormsNavigatiTabPage.UIAddLocationButton.WaitForControlExist(10000);

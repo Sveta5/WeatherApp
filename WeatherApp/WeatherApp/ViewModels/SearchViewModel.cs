@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using WeatherApp.Models;
+using WeatherApp.Services.Location;
+using WeatherApp.Services.Weather;
 
 namespace WeatherApp.ViewModels
 {
@@ -10,6 +12,16 @@ namespace WeatherApp.ViewModels
         public ObservableCollection<LocationInfo> LocationInfos { get; set; }
 
         public SearchViewModel()
+        {
+            InitializeSearchViewModel();
+        }
+
+        public SearchViewModel(ILocationService<LocationInfo> locationService, IWeatherApiClient weatherApiClient) : base(locationService, weatherApiClient)
+        {
+            InitializeSearchViewModel();
+        }
+
+        private void InitializeSearchViewModel()
         {
             Title = "Location search";
             LocationInfos = new ObservableCollection<LocationInfo>();
@@ -21,7 +33,7 @@ namespace WeatherApp.ViewModels
             {
                 LocationInfos.Clear();
 
-                var items = await WeaterApiClient.SearchLocation(postalCode);
+                var items = await WeatherApiClient.SearchLocation(postalCode);
                 var locationInfos = items.ToList();
 
                 if (items.ToList().Count == 0) return;

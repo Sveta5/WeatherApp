@@ -20,6 +20,7 @@ namespace UnitTestProject.Services
             httpClientMock = new Mock<HttpClient>();
 
         }
+
         [TestMethod]
         public void GetLocationTest()
         {
@@ -36,9 +37,9 @@ namespace UnitTestProject.Services
 
             httpClientMock.Setup(service => service.GetStringAsync(It.IsRegex(".*16802.*"))).ReturnsAsync(locationBody);
 
-            IWeatherApiClient client = new WeaterApiClient(httpClientMock.Object);
+            IWeatherApiClient client = new WeatherApiClient(httpClientMock.Object);
 
-            var searchcResult = client.SearchLocation("16802");
+            var searchcResult = client.SearchLocation("168025");
             searchcResult.Wait();
             Assert.AreEqual(locationBody, searchcResult.Result);
         }

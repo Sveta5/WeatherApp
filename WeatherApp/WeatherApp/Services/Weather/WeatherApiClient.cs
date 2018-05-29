@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using WeatherApp.Models;
 using WeatherApp.Models.Weather;
-using WeatherApp.Services.Weather;
 
 namespace WeatherApp.Services.Weather
 {
-    public class WeaterApiClient : IWeatherApiClient
+    public class WeatherApiClient : IWeatherApiClient
     {
         private const string OpenWeatherApi = "http://dataservice.accuweather.com/";
         private const string ApiKey = "apikey=eCl8zxAnkAIRifdeVX7ADI8AjpufB0A7";
@@ -20,13 +19,13 @@ namespace WeatherApp.Services.Weather
 
         private readonly HttpClient HttpClient;
 
-        public WeaterApiClient()
+        public WeatherApiClient()
         {
             HttpClient = new HttpClient();
         }
-        public WeaterApiClient(HttpClient HttpClient)
+        public WeatherApiClient(HttpClient httpClient)
         {
-            this.HttpClient = HttpClient;
+            this.HttpClient = httpClient;
         }
 
         public async Task<IEnumerable<LocationInfo>> SearchLocation(string postalCode)
@@ -42,7 +41,6 @@ namespace WeatherApp.Services.Weather
             var weatherInfo = await RequestResult<WeatherInfo[]>(urlWithParametr);
             return weatherInfo[0];
         }
-
         private async Task<T> RequestResult<T>(string urlWithParametr)
         {
             Console.Write(OpenWeatherApi + urlWithParametr + ApiKey);
