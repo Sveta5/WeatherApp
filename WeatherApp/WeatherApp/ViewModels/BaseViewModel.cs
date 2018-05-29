@@ -13,7 +13,7 @@ namespace WeatherApp.ViewModels
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
         public ILocationService<LocationInfo> LocationService;
-        public WeaterApiClient WeaterApiClient;
+        public IWeatherApiClient WeatherApiClient;
 
         bool isBusy = false;
 
@@ -24,16 +24,17 @@ namespace WeatherApp.ViewModels
         }
 
         string title = string.Empty;
-        public BaseViewModel()
+
+        protected BaseViewModel()
         {
+            WeatherApiClient = new WeatherApiClient();
             LocationService = new LocationService();
-            WeaterApiClient = new WeaterApiClient();
         }
 
-        public BaseViewModel(ILocationService<LocationInfo> locationService, WeaterApiClient weaterApiClient)
+        protected BaseViewModel(ILocationService<LocationInfo> locationService, IWeatherApiClient weatherApiClient)
         {
+            WeatherApiClient = weatherApiClient;
             LocationService = locationService;
-            WeaterApiClient = weaterApiClient;
         }
 
         public string Title
@@ -68,7 +69,7 @@ namespace WeatherApp.ViewModels
 
         #endregion
 
-        public async Task ExecuteCommand(Func<Task> func)
+        protected async Task ExecuteCommand(Func<Task> func)
         {
             if (IsBusy)
                 return;
