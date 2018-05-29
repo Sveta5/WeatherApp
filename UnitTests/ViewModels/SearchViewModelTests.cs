@@ -23,12 +23,12 @@ namespace UnitTestProject.ViewModels
             {
                 Key = "6342",
                 Country = new Country {EnglishName = "United States"},
-                LocationName = "State College",
+                LocationName = "New York",
                 PostalCode = "16802"
             };
-            weatherApiClientMock.Setup(service => service.SearchLocation(location.PostalCode)).ReturnsAsync(new Collection<LocationInfo>(){location});
+            weatherApiClientMock.Setup(service => service.SearchLocation(location.LocationName)).ReturnsAsync(new Collection<LocationInfo>(){location});
             var searchViewModel = new SearchViewModel(propertiesMock.Object, weatherApiClientMock.Object);
-            searchViewModel.SearchForLocation(location.PostalCode).Wait();
+            searchViewModel.SearchForLocation(location.LocationName).Wait();
 
             var collectionContent = searchViewModel.LocationInfos;
 

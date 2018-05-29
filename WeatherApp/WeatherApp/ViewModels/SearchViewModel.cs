@@ -27,13 +27,13 @@ namespace WeatherApp.ViewModels
             LocationInfos = new ObservableCollection<LocationInfo>();
         }
 
-        public async Task SearchForLocation(string postalCode)
+        public async Task SearchForLocation(string cityName)
         {
             await ExecuteCommand(async () =>
             {
                 LocationInfos.Clear();
 
-                var items = await WeatherApiClient.SearchLocation(postalCode);
+                var items = await WeatherApiClient.SearchLocation(cityName);
                 var locationInfos = items.ToList();
 
                 if (items.ToList().Count == 0) return;

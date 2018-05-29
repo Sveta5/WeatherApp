@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="WeatherApp.Views.SearchPage"
-		     Title="Lication Search">
+		     Title="Location Search">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Back" Clicked="Back_Clicked" AutomationId="BackButton">
             <ToolbarItem.Icon>
@@ -26,24 +26,25 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Label Text="Search by Zip Code" 
+                <Label Text="Search by City Name/Postal Code" 
                        Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
                        HorizontalOptions="Center"
                        TextColor="White" FontAttributes="Bold" FontSize="Medium" />
 
-                <Label x:Name="zipCodeLabel" Text="Zip Code:" 
+                <Label x:Name="SearchLabel" Text="City Name/Postal Code:" 
                        Grid.Row="1" Grid.Column="0"
+                       FontAttributes="Bold"
                        VerticalOptions="Center"/>
 
-                <Entry x:Name="zipCodeEntry"
+                <Entry x:Name="LocationSearchEntry"
                        Grid.Row="1" Grid.Column="1"
                        VerticalOptions="Center"
                        Margin="5,0"
                        BackgroundColor="DarkGray"
                        TextColor="White"
-                       AutomationId="zipCodeEntry"/>
+                       AutomationId="LocationSearchEntry"/>
 
-                <Button x:Name="getLocationBtn" Text="Search location" 
+                <Button x:Name="GetLocationBtn" Text="Search location" 
                         Grid.Row="1" Grid.Column="2"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
@@ -52,12 +53,12 @@
                         BackgroundColor="DarkGray"
                         TextColor="White"
                         Clicked="SearchWeatherBtn_Clicked"
-                        AutomationId="getLocationBtn" />
+                        AutomationId="GetLocationBtn" />
             </Grid>
             <Label Text="Search results" x:Name="SerchResultLabel"
                        Margin="10,0,0,0"
                        HorizontalOptions="Start" AutomationId="SerchResultLabel"
-                       TextColor="Black" FontSize="Medium" />
+                       TextColor="Black" FontSize="Default" />
             <ListView x:Name="SerchedItemsListView"
                       ItemsSource="{Binding LocationInfos}"
                       VerticalOptions="FillAndExpand"

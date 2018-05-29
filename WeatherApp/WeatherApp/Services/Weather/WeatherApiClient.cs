@@ -28,9 +28,9 @@ namespace WeatherApp.Services.Weather
             this.HttpClient = httpClient;
         }
 
-        public async Task<IEnumerable<LocationInfo>> SearchLocation(string postalCode)
+        public async Task<IEnumerable<LocationInfo>> SearchLocation(string cityName)
         {
-            var urlWithParametr = string.Format(LocationSearchByPostalCodeUrl, postalCode);
+            var urlWithParametr = string.Format(LocationSearchByPostalCodeUrl, cityName);
             var locationInfos = await RequestResult<IEnumerable<LocationInfo>>(urlWithParametr);
             return locationInfos;
         }
