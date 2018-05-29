@@ -7,7 +7,7 @@ namespace WeatherApp.Services.Weather
 {
     public interface IWeatherApiClient
     {
-        Task<IEnumerable<LocationInfo>> SearchLocation(string postalCode);
+        Task<IEnumerable<LocationInfo>> SearchLocation(string searchValue);
         Task<WeatherInfo> GetCurrentWeather(string cityKey);
     }
 }

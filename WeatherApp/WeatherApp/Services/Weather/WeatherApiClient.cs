@@ -14,7 +14,7 @@ namespace WeatherApp.Services.Weather
         private const string OpenWeatherApi = "http://dataservice.accuweather.com/";
         private const string ApiKey = "apikey=eCl8zxAnkAIRifdeVX7ADI8AjpufB0A7";
 
-        private const string LocationSearchByPostalCodeUrl = "locations/v1/cities/search?q={0}&";
+        private const string LocationSearchByValueUrl = "locations/v1/cities/search?q={0}&";
         private const string CurretnWeatherByLocationKeyUrl = "currentconditions/v1/{0}?";
 
         private readonly HttpClient HttpClient;
@@ -28,9 +28,9 @@ namespace WeatherApp.Services.Weather
             this.HttpClient = httpClient;
         }
 
-        public async Task<IEnumerable<LocationInfo>> SearchLocation(string postalCode)
+        public async Task<IEnumerable<LocationInfo>> SearchLocation(string searchValue)
         {
-            var urlWithParametr = string.Format(LocationSearchByPostalCodeUrl, postalCode);
+            var urlWithParametr = string.Format(LocationSearchByValueUrl, searchValue);
             var locationInfos = await RequestResult<IEnumerable<LocationInfo>>(urlWithParametr);
             return locationInfos;
         }

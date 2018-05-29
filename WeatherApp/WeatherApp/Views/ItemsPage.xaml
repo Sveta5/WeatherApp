@@ -3,7 +3,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WeatherApp.Views.ItemsPage"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             AutomationId="RootElement">
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15">
             <StackLayout Padding="10, 10, 10, 10" Orientation="Horizontal">
@@ -50,9 +51,10 @@
                       AutomationId="AllLocationsList">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell AutomationId="Cell">
+                        <ViewCell AutomationId="AllLocationsListCell">
                             <StackLayout Padding="10">
                                 <Label Text="{Binding LocationName}"
+                                       AutomationId="LocationsItem"
                                        LineBreakMode="NoWrap"
                                        Style="{DynamicResource ListItemTextStyle}"
                                        FontSize="16" />

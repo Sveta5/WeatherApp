@@ -21,11 +21,11 @@ namespace WeatherApp.Views
 
         private async void SearchWeatherBtn_Clicked(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(zipCodeEntry.Text))
+            if (!String.IsNullOrEmpty(SearchValueEntry.Text))
             {
-                await Item.SearchForLocation(zipCodeEntry.Text);
+                await Item.SearchForLocation(SearchValueEntry.Text);
                 SerchResultLabel.Text = "";
-                getLocationBtn.Text = "Search Again";
+                GetLocationBtn.Text = "Search Again";
 
                 if (Item.LocationInfos.Count == 0)
                 {
