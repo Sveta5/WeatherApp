@@ -1,16 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+﻿using Moq;
+using NUnit.Framework;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using WeatherApp.Models;
 using WeatherApp.Services.Data;
 using WeatherApp.Services.Location;
 
 namespace UnitTestProject.Services
 {
-    [TestClass]
+    [TestFixture]
     public class LocationServiceTests
     {
         Mock<IDataStore<List<LocationInfo>>> propertiesMock = new Mock<IDataStore<List<LocationInfo>>>();
@@ -22,14 +20,14 @@ namespace UnitTestProject.Services
             PostalCode = "16802"
         };
 
-        [TestInitialize]
+        [SetUp]
         public void SetUpMocks()
         {
             propertiesMock.Setup(service => service.StoreData(It.IsAny<List<LocationInfo>>())).ReturnsAsync(true);
             propertiesMock.Setup(service => service.GetData()).ReturnsAsync(new List<LocationInfo>());
         }
 
-        [TestMethod]
+        [Test]
         public void AddLocationTest()
         {
             ILocationService<LocationInfo> locatioService = new LocationService(propertiesMock.Object);
@@ -43,7 +41,7 @@ namespace UnitTestProject.Services
             Assert.AreEqual(location, itemsResult.Result.First());
         }
 
-        [TestMethod]
+        [Test]
         public void DeleteLocationTest()
         {
             ILocationService<LocationInfo> locatioService = new LocationService(propertiesMock.Object);

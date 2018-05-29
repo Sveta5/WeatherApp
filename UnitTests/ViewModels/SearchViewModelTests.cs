@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using NUnit.Framework;
 using WeatherApp.Models;
 using WeatherApp.Services.Location;
 using WeatherApp.Services.Weather;
@@ -11,10 +9,10 @@ using WeatherApp.ViewModels;
 
 namespace UnitTestProject.ViewModels
 {
-    [TestClass]
+    [TestFixture]
     public class SearchViewModelTests
     {
-        [TestMethod]
+        [Test]
         public void SearchWeatherTets()
         {
             var propertiesMock = new Mock<ILocationService<LocationInfo>>();

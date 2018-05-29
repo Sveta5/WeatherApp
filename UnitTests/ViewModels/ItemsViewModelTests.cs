@@ -1,8 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using NUnit.Framework;
 using WeatherApp.Models;
 using WeatherApp.Models.Weather;
 using WeatherApp.Services.Location;
@@ -11,11 +10,11 @@ using WeatherApp.ViewModels;
 
 namespace UnitTestProject.ViewModels
 {
-    [TestClass]
+    [TestFixture]
     public class ItemsViewModelTests
     {
 
-        [TestMethod]
+        [Test]
         public void AddItemTest()
         {
             var propertiesMock = new Mock<ILocationService<LocationInfo>>();
