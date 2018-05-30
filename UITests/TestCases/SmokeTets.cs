@@ -56,5 +56,34 @@ namespace UITests.TestCases
             resultList = itemsPage.GetLocationsList();
             Assert.IsFalse(resultList.Contains(selectedItemName));
         }
+
+        [Test]
+        public void DataStoringBetweenLaunchesTest()
+        {
+            var locationName = "New York";
+
+            var itemsPage = new ItemsPage(DriverInstance);
+            Assert.IsTrue(itemsPage.IsOppened());
+
+            var selectedItemName = itemsPage.ClickAddLocationButton()
+                                .SetValueToSearch(locationName).ClickSearchButton()
+                                .SelectFirstLocationNameItem();
+            Assert.IsTrue(itemsPage.IsOppened());
+
+            var resultList = itemsPage.WaitForValueAddedInList(selectedItemName, 5).GetLocationsList();
+            Assert.IsTrue(resultList.Contains(selectedItemName));
+
+            DriverInstance.CloseApp();
+            DriverInstance.Quit();
+
+            SetupSession();
+
+            var reloadedItemsPage = new ItemsPage(DriverInstance);
+            Assert.IsTrue(reloadedItemsPage.IsOppened());
+
+            resultList = reloadedItemsPage.WaitForValueAddedInList(selectedItemName, 5).GetLocationsList();
+            Assert.IsTrue(resultList.Contains(selectedItemName));
+            reloadedItemsPage.SelectLocationInList(selectedItemName).ClickDeleteLocationButton();
+        }
     }
 }
