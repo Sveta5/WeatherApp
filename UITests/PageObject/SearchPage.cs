@@ -11,6 +11,7 @@ namespace UITests.PageObject
         private WindowsElement SearchLocationEnter => DriverSession.FindElementByAccessibilityId("SearchValueEntry");
         private WindowsElement SearchLocationButton => DriverSession.FindElementByAccessibilityId("GetLocationBtn");
         private IReadOnlyCollection<WindowsElement> SearchResultLocationNames => DriverSession.FindElementsByAccessibilityId("SearchResultLocationNameItem");
+        private IReadOnlyCollection<WindowsElement> SearchResultPostalCodes => DriverSession.FindElementsByAccessibilityId("SearchResultPostalCodeItem");
 
         public SearchPage(WindowsDriver<WindowsElement> session) : base(session)
         {
@@ -33,6 +34,11 @@ namespace UITests.PageObject
             WaitFoSearchApplied();
             return SearchResultLocationNames.Select(item => item.Text);
         }
+        public IEnumerable<string> GetSearchResultPostalCodes()
+        {
+            WaitFoSearchApplied();
+            return SearchResultPostalCodes.Select(item => item.Text);
+        }
 
         public string SelectFirstLocationNameItem()
         {
@@ -54,6 +60,5 @@ namespace UITests.PageObject
                 Task.Delay(1000);
             }
         }
-
     }
 }

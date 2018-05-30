@@ -51,7 +51,7 @@
                       AutomationId="AllLocationsList">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell AutomationId="AllLocationsListCell">
+                        <ViewCell>
                             <StackLayout Padding="10">
                                 <Label Text="{Binding LocationName}"
                                        AutomationId="LocationsItem"

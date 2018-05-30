@@ -7,19 +7,33 @@ namespace UITests.TestCases
     public class SmokeTets : BaseWeatherAppTest
     {
         [Test]
-        public void SearchLoactionTest()
+        public void SearchLoactionByLocationNameTest()
         {
             var cityName = "New York";
 
             var itemsPage = new ItemsPage(DriverInstance);
             Assert.IsTrue(itemsPage.IsOppened());
 
-            var searchResults = itemsPage.ClickAddLocationButton()
+            var firstItem = itemsPage.ClickAddLocationButton()
                                 .SetValueToSearch(cityName).ClickSearchButton()
-                                .GetSearchResultLocationNames();
-            var firstItem = searchResults.First();
+                                .GetSearchResultLocationNames().First();
 
             Assert.AreEqual(cityName, firstItem);
+        }
+
+        [Test]
+        public void SearchLoactionByPostalCodeTest()
+        {
+            var postalCode = "16801";
+
+            var itemsPage = new ItemsPage(DriverInstance);
+            Assert.IsTrue(itemsPage.IsOppened());
+
+            var firstItem = itemsPage.ClickAddLocationButton()
+                                .SetValueToSearch(postalCode).ClickSearchButton()
+                                .GetSearchResultPostalCodes().First();
+
+            Assert.AreEqual(postalCode, firstItem);
         }
 
         [Test]
