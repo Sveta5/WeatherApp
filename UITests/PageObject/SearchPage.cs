@@ -10,7 +10,7 @@ namespace UITests.PageObject
     {
         private WindowsElement SearchLocationEnter => DriverSession.FindElementByAccessibilityId("SearchValueEntry");
         private WindowsElement SearchLocationButton => DriverSession.FindElementByAccessibilityId("GetLocationBtn");
-        private IReadOnlyCollection<WindowsElement> SearchResultsContainer => DriverSession.FindElementsByAccessibilityId("SearchResultItem");
+        private IReadOnlyCollection<WindowsElement> SearchResultLocationNames => DriverSession.FindElementsByAccessibilityId("SearchResultLocationNameItem");
 
         public SearchPage(WindowsDriver<WindowsElement> session) : base(session)
         {
@@ -28,17 +28,17 @@ namespace UITests.PageObject
             return this;
         }
 
-        public IEnumerable<string> GetSearchResults()
+        public IEnumerable<string> GetSearchResultLocationNames()
         {
             WaitFoSearchApplied();
-            return SearchResultsContainer.Select(item => item.Text);
+            return SearchResultLocationNames.Select(item => item.Text);
         }
 
-        public string SelectFirstResultItem()
+        public string SelectFirstLocationNameItem()
         {
             WaitFoSearchApplied();
 
-            var firstItem = SearchResultsContainer.First();
+            var firstItem = SearchResultLocationNames.First();
             var textResult = firstItem.Text;
 
             DriverSession.Mouse.Click(firstItem.Coordinates);

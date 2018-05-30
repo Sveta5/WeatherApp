@@ -78,11 +78,12 @@
                                        Style="{DynamicResource ListItemTextStyle}"
                                        FontSize="16" />
                                 <Label Text="{Binding LocationName}"
-                                       AutomationId="SearchResultItem"
+                                       AutomationId="SearchResultLocationNameItem"
                                        LineBreakMode="NoWrap"
                                        Style="{DynamicResource ListItemTextStyle}"
                                        FontSize="16" />
                                 <Label Text="{Binding PostalCode}"
+                                       AutomationId="SearchResultPostalCodeItem"
                                        LineBreakMode="NoWrap"
                                        Style="{DynamicResource ListItemTextStyle}"
                                        FontSize="16" />

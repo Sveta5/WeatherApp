@@ -19,7 +19,7 @@ namespace WeatherApp.ViewModels
         {
             InitializeItemsViewModel();
         }
-        
+
         public ItemsViewModel(ILocationService<LocationInfo> locationService, IWeatherApiClient weatherApiClient) : base(locationService, weatherApiClient)
         {
             InitializeItemsViewModel();
@@ -45,13 +45,17 @@ namespace WeatherApp.ViewModels
         {
             await ExecuteCommand(async () =>
             {
-                LocationInfos.Clear();
                 var items = await LocationService.GetItemsAsync();
                 foreach (var locationInfo in items)
                 {
                     var weather = await WeatherApiClient.GetCurrentWeather(locationInfo.Key);
-                    locationInfo.WeatherInfo = weather;
-                    LocationInfos.Add(locationInfo);
+                    if (weather != null) locationInfo.WeatherInfo = weather;
+
+                }
+                if (items != null)
+                {
+                    LocationInfos.Clear();
+                    foreach (var item in items) LocationInfos.Add(item);
                 }
             }
             );

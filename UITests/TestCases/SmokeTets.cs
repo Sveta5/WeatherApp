@@ -16,7 +16,7 @@ namespace UITests.TestCases
 
             var searchResults = itemsPage.ClickAddLocationButton()
                                 .SetValueToSearch(cityName).ClickSearchButton()
-                                .GetSearchResults();
+                                .GetSearchResultLocationNames();
             var firstItem = searchResults.First();
 
             Assert.AreEqual(cityName, firstItem);
@@ -32,7 +32,7 @@ namespace UITests.TestCases
 
             var selectedItemName = itemsPage.ClickAddLocationButton()
                                 .SetValueToSearch(cityName).ClickSearchButton()
-                                .SelectFirstResultItem();
+                                .SelectFirstLocationNameItem();
             Assert.IsTrue(itemsPage.IsOppened());
 
             var resultList = itemsPage.WaitForValueAddedInList(selectedItemName, 5).GetLocationsList();
