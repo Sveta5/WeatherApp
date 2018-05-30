@@ -16,7 +16,7 @@ namespace UITests.TestCases
 
             var searchResults = itemsPage.ClickAddLocationButton()
                                 .SetValueToSearch(cityName).ClickSearchButton()
-                                .GetSearchResults();//wait for search again text
+                                .GetSearchResults();
             var firstItem = searchResults.First();
 
             Assert.AreEqual(cityName, firstItem);

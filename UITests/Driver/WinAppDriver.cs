@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium.Appium.Windows;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Remote;
 using System;
 using System.Diagnostics;
@@ -20,18 +21,19 @@ namespace UITests.Driver
             process = Process.Start(processInfo);
         }
 
-        public WindowsDriver<WindowsElement> GetSessionWithRetry(DesiredCapabilities appCapabilities, int retryCount)
+        public WindowsDriver<T> GetSessionWithRetry<T>(DesiredCapabilities appCapabilities, int retryCount) where T : IWebElement
         {
-            WindowsDriver<WindowsElement> DriverInstance = null;
+            WindowsDriver<T> DriverInstance = null;
             for (; retryCount > 0; retryCount--)
             {
                 try
                 {
-                    DriverInstance = new WindowsDriver<WindowsElement>(new Uri(WinAppDriverUri), appCapabilities, TimeSpan.FromMinutes(1));
+                    DriverInstance = new WindowsDriver<T>(new Uri(WinAppDriverUri), appCapabilities, TimeSpan.FromMinutes(1));
                     break;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
+                    Debug.WriteLine("Driver is not connected to application. Try again.");
                     continue;
                 }
             }

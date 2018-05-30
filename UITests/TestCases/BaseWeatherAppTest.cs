@@ -11,7 +11,7 @@ namespace UITests
     public abstract class BaseWeatherAppTest
     {
         private const string WearherAppAutomationId = "0d599d98-d9a7-4453-9f7d-b76ccfa9e3b9_2jv79xvh9a28c!App";//";
-        public const string WinAppDriverUri = "http://127.0.0.1:4723";
+
         private WinAppDriver WinAppDriver = new WinAppDriver();
         protected WindowsDriver<WindowsElement> DriverInstance;
 
@@ -28,7 +28,7 @@ namespace UITests
             appCapabilities.SetCapability("app", WearherAppAutomationId);
             appCapabilities.SetCapability("platformName", "Windows");
 
-            DriverInstance = WinAppDriver.GetSessionWithRetry(appCapabilities, 10);
+            DriverInstance = WinAppDriver.GetSessionWithRetry<WindowsElement>(appCapabilities, 10);
 
             DriverInstance.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
         }
